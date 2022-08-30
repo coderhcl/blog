@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt()
+  username   String   @unique
+  password   String
+  role       String   @default("user")
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+//分类
+model category {
+  id           Int      @id @default(autoincrement()) @db.UnsignedInt()
+  categoryname String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@map("categories")
+}
+
+// 分类下的标签
+model tag {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt()
+  tagname    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("tags")
+}
+
+// 文章
+model article {
+  id             Int      @id @default(autoincrement()) @db.UnsignedInt()
+  title          String   @unique
+  content        String   @db.Text
+  htmlContent    String   @db.Text
+  contentOutline String //内容概要
+  firstPicture   String //头图
+  category       String
+  tags           String
+  status         String?  @default("已发布") //是否发布
+  isTop          Boolean? @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  @@map("articles")
+}
+
+// 建站日志
+model history {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt()
+  date       DateTime @default(now())
+  describe   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+// 友链
+model link {
+  id         Int      @id @default(autoincrement()) @db.UnsignedInt()
+  name       String
+  avatar     String
+  url        String
+  outline    String
+  isValid    Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("links")
+}
+
+model project {
+  id        Int     @id @default(autoincrement()) @db.UnsignedInt()
+  imgUrl    String
+  name      String
+  desc      String
+  sourceUrl String? //源码链接
+
+  @@map("projects")
+}
