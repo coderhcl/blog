@@ -1,9 +1,9 @@
 # blog
 ## 前端
-  前台使用nuxt3
-  后台使用vite+ts+vue3+element-plus+axios+echart等
+  前台使用`nuxt3`
+  后台使用`vite`+`ts`+`vue3`+`element-plus`+`axios`+`echart`等
 ## 后端
-  接口使用nestjs构建，控制器，拦截器，权限验证等都有
+  接口使用`nestjs` + `prisma` + `mysql`构建，控制器，拦截器，权限验证等都有
 
 # 前台界面展示
 ### 首页
